@@ -1,0 +1,33 @@
+// Copyright 2015, The Ostrich
+
+syntax = "proto3";
+
+package api_experiment;
+
+
+// The ApiExperiment service definition.
+service ApiExperiment {
+    // Sends a greeting
+    rpc EchoTimestamp (BaseRequest) returns (TimestampReply) {}
+    rpc SleepAndEcho (SleepRequest) returns (TimestampReply) {}
+}
+
+
+// Base proto for request messages.
+message BaseRequest {
+    uint32 req_id = 1;
+}
+
+
+// Proto request message with delay field.
+message SleepRequest {
+    uint32 req_id = 1;
+    uint32 delay = 2;  // in milliseconds
+}
+
+
+// Proto message with timestamp field and the corresponding request ID.
+message TimestampReply {
+    uint32 req_id = 1;
+    uint64 timestamp = 2;  // in microseconds elapsed since epoch
+}
